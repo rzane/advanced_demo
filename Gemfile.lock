@@ -38,12 +38,23 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    advanced (0.1.4)
+      activesupport
+      pipey
     arel (8.0.0)
+    autoprefixer-rails (7.1.2.6)
+      execjs
     bindex (0.5.0)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
+    carmen (1.0.2)
+      activesupport (>= 3.0.0)
     concurrent-ruby (1.0.5)
     erubi (1.6.1)
+    execjs (2.7.0)
     ffi (1.9.18)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
@@ -65,6 +76,7 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
+    pipey (0.1.0)
     puma (3.9.1)
     rack (2.0.3)
     rack-test (0.6.3)
@@ -135,7 +147,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  advanced
+  bootstrap-sass
   byebug
+  carmen
   jbuilder (~> 2.5)
   puma (~> 3.7)
   rails (~> 5.1.3)
