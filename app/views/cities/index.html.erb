@@ -1,0 +1,75 @@
+<h1 class="page-header">
+  Cities
+</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>State</th>
+          <th>Population</th>
+          <th>Rank</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @cities.each do |city| %>
+          <tr>
+            <td><%= city.name %></td>
+            <td><%= city.state.name %></td>
+            <td><%= number_with_delimiter city.population %></td>
+            <td><%= city.rank %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <%= form_for @form, method: :get, url: cities_path, as: :q do |f| %>
+      <div class="form-group">
+        <%= f.label :name, class: 'control-label' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <%= f.fields_for :state do |state| %>
+        <div class="form-group">
+          <%= state.label :name, 'State', class: 'control-label' %>
+          <%= state.text_field :name, class: 'form-control' %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label 'Population', class: 'control-label' %>
+
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.number_field :population_gteq, class: 'form-control', placeholder: 'Min' %>
+          </div>
+          <div class="col-md-6">
+            <%= f.number_field :population_lteq, class: 'form-control', placeholder: 'Max' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label 'Rank', class: 'control-label' %>
+
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.number_field :rank_gteq, class: 'form-control', placeholder: 'Min' %>
+          </div>
+          <div class="col-md-6">
+            <%= f.number_field :rank_lteq, class: 'form-control', placeholder: 'Max' %>
+          </div>
+        </div>
+      </div>
+
+      <%= f.submit 'Search', class: 'btn btn-primary' %>
+      <%= link_to 'Reset', cities_path, class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>
+

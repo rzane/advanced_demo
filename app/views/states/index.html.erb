@@ -1,0 +1,36 @@
+<h1 class="page-header">
+  States
+</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @states.each do |state| %>
+          <tr>
+            <td><%= state.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <%= form_for @form, method: :get, url: states_path, as: :q do |f| %>
+      <div class="form-group">
+        <%= f.label :name, class: 'control-label' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <%= f.submit 'Search', class: 'btn btn-primary' %>
+      <%= link_to 'Reset', states_path, class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>
+
