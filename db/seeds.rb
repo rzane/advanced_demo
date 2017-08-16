@@ -1,7 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'json'
+
+file   = Rails.root.join('db', 'cities.json')
+data   = JSON.parse(file.read, symbolize_names: true)
+states = data.group_by { |data| data[:state] }
+
+ActiveRecord::Base.transaction do
+  states.each do |name, cities_data|
+    state = State.create!(name: name)
+
+    cities_data.each do |datum|
+      state.cities.create!(
+        name:       datum.fetch(:city),
+        rank:       datum.fetch(:rank).to_i,
+        population: datum.fetch(:population).to_i
+      )
+    end
+  end
+end
